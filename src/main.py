@@ -1,5 +1,4 @@
 import sys
-import os
 from pathlib import Path
 
 # Добавляем родительскую директорию в path для импортов
@@ -14,7 +13,7 @@ app = FastAPI(
     version=settings.VERSION,
     description="Платформа для покупки и продажи товаров между студентами",
     docs_url="/docs",  # Swagger UI
-    redoc_url="/redoc"  # ReDoc документация
+    redoc_url="/redoc",  # ReDoc документация
 )
 
 
@@ -26,7 +25,7 @@ async def root():
     return {
         "message": "Добро пожаловать в UniMarket!",
         "version": settings.VERSION,
-        "docs": "/docs"
+        "docs": "/docs",
     }
 
 
@@ -38,7 +37,7 @@ async def get_about():
     return {
         "project": "UniMarket",
         "description": "Студенческий маркетплейс ФИО",
-        "author": "Ваше имя"
+        "author": "Ваше имя",
     }
 
 
@@ -47,18 +46,15 @@ async def health_check():
     """
     Health check endpoint - проверка работоспособности
     """
-    return {
-        "status": "healthy",
-        "project": settings.PROJECT_NAME
-    }
+    return {"status": "healthy", "project": settings.PROJECT_NAME}
 
 
 if __name__ == "__main__":
     import uvicorn
+
     uvicorn.run(
         "src.main:app",
         host="0.0.0.0",
         port=8000,
-        reload=True  # Автоперезагрузка при изменении кода
+        reload=True,  # Автоперезагрузка при изменении кода
     )
-
